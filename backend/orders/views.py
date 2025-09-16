@@ -1,3 +1,51 @@
-from django.shortcuts import render
+"""
+View per l'app orders.
+Definiscono gli endpoint per le operazioni CRUD.
+"""
 
-# Create your views here.
+from rest_framework import viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from .models import Order, Product
+from .serializers import OrderSerializer, ProductSerializer
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    Fornisce gli endpoint CRUD per gli ordini:
+    - list
+    - retrieve
+    - create
+    - update
+    - delete
+    """
+
+    queryset = Order.objects.all().order_by("-date")
+    serializer_class = OrderSerializer
+    filter_backends = [
+        filters.SearchFilter,
+        DjangoFilterBackend,  # necessario per filtrare dalla data esatta
+        filters.OrderingFilter,
+    ]
+    search_fields = [
+        "name",
+        "description",
+    ]
+    filterset_fields = ["name", "date"]
+    ordering_fields = ["name", "date"]
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    """
+    Fornisce gli endpoint CRUD per i prodotti:
+    - list
+    - retrieve
+    - create
+    - update
+    - delete
+    """
+
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ["name"]
+    ordering_fields = ["name", "price"]

@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import OrdersListView from '../views/OrdersListView.vue'
-import OrderDetailView from '../views/OrderDetailView.vue'
-import OrderEditView from '../views/OrderEditView.vue'
+import OrdersListView from '@/views/OrdersListView.vue'
+import OrderDetailView from '@/views/OrderDetailView.vue'
+import OrderEditView from '@/views/OrderEditView.vue'
+import OrderCreateView from '@/views/OrderCreateView.vue'
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     name: 'order-edit',
     component: OrderEditView,
     props: true,
+  },
+  {
+    path: '/orders/create',
+    name: 'order-create',
+    component: OrderCreateView,
   },
 ]
 

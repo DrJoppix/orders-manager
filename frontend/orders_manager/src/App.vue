@@ -12,16 +12,8 @@
           <router-link to="/orders">Lista ordini</router-link>
         </li>
         <li>
-          <!-- Dettaglio ordine esempio id=1 -->
-          <router-link :to="{ name: 'order-detail', params: { id: 1 } }">
-            Dettaglio ordine 1
-          </router-link>
-        </li>
-        <li>
-          <!-- Modifica ordine esempio id=1 -->
-          <router-link :to="{ name: 'order-edit', params: { id: 1 } }">
-            Modifica ordine 1
-          </router-link>
+          <!-- Nuovo ordine -->
+          <router-link to="/orders/create">Crea nuovo ordine</router-link>
         </li>
       </ul>
     </nav>

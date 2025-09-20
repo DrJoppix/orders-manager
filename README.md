@@ -1,6 +1,6 @@
 # Orders Manager
 
-## Configurazione BackEnd in Python (Django)
+## Configurazione BackEnd in Django
 
 - Creazione Virtual Environment
 
@@ -43,7 +43,7 @@
 
 In un altro terminale:
 
-- `cd frontend/orders_manager`
+- `cd frontend`
 - `npm install`
 - `npm run dev`
 - Lasciare il terminale aperto

@@ -3,7 +3,7 @@
  *
  * @returns Array di prodotti
  */
-export async function fetchProducts(filters) {
+export async function fetchProducts(filters = {}) {
   let url = new URL('http://127.0.0.1:8000/api/products/')
   Object.keys(filters).forEach((key) => {
     if (filters[key]) {

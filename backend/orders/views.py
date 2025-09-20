@@ -30,7 +30,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         "name",
         "description",
     ]
-    filterset_fields = ["name", "date"]
+    filterset_fields = ["date"]
     ordering_fields = ["name", "date"]
 
 

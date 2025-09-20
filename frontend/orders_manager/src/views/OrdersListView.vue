@@ -5,7 +5,6 @@
         <!-- Form filtri -->
         <form @submit.prevent="applyFilters">
             <input v-model="filters.search" type="text" placeholder="Cerca..." />
-            <input v-model="filters.name" type="text" placeholder="Cerca per nome esatto" />
             <input v-model="filters.date" type="date" />
             <select v-model="filters.ordering">
                 <option value="">Senza ordine</option>
@@ -21,7 +20,11 @@
         <ul>
             <li v-for="order in orders" :key="order.id">
 
-                {{ order.name }} - {{ order.date }}
+                {{ order.name }} - {{ order.date }} - {{ order.description }} -
+
+                 <router-link :to="{ name: 'order-edit', params: { id: order.id } }">
+                    Modifica
+                </router-link>
 
                 <router-link :to="{ name: 'order-detail', params: { id: order.id } }">
                     Dettaglio
@@ -40,7 +43,6 @@ const orders = ref([])
 
 const filters = reactive({
     search: '',
-    name: '',
     date: '',
     ordering: ''
 })

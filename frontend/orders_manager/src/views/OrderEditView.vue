@@ -9,7 +9,7 @@
     </router-link>
 
     <!-- Form modifica ordine -->
-    <form @submit.prevent="updateOrder">
+    <form @submit.prevent="applyFilters">
         <input v-model="order.name" type="text" placeholder="Nome" required />
         <input v-model="order.description" type="text" placeholder="Descrizione" />
         <input v-model="order.date" type="date" required />
@@ -45,6 +45,13 @@ const order = reactive({
     products: []
 })
 const products = ref([])
+
+// Funzione per applicare i filtri. Ho dovuto separarla da fetchOrders.
+async function applyFilters(event) {
+    event.preventDefault()
+    order.value = await updateOrder(route.params.id, order)
+    alert('Ordine aggiornato con successo!')
+}
 
 // Caricamento dettagli dell'ordine.
 onMounted(() => {

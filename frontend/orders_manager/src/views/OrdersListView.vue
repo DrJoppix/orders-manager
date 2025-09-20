@@ -27,10 +27,6 @@
                     Dettaglio
                 </router-link>
 
-                <router-link :to="{ name: 'order-edit', params: { id: order.id } }">
-                    Modifica
-                </router-link>
-
             </li>
         </ul>
     </div>

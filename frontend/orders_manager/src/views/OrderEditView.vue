@@ -30,7 +30,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { fetchOrder, updateOrder } from '@/services/orders'
 import { fetchProducts } from '@/services/products'
 
@@ -38,6 +38,7 @@ import { fetchProducts } from '@/services/products'
 defineProps(['id'])
 
 const route = useRoute()
+const router = useRouter()
 const order = reactive({
     name: '',
     description: '',
@@ -57,12 +58,16 @@ async function applyFilters(event) {
 onMounted(() => {
     fetchOrder(route.params.id).then(data => {
         // Assegna i dati alla proprietà reattiva corrispondente.
+        if(!data) {
+            router.push({ name: 'orders-list' })
+            return
+        }
         Object.assign(order, data)
     })
 })
 onMounted(() => {
     fetchProducts().then(data => {
-        products.value = data
+        Object.assign(products.value, data)
     })
 })
 

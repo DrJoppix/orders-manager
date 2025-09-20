@@ -43,7 +43,7 @@ export async function fetchOrder(id) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
-      throw new Error(`Errore fetch ordine${id}`)
+      throw new Error(`Errore fetch ordine ${id}`)
     }
     return await res.json()
   } catch (err) {
@@ -63,7 +63,7 @@ export async function fetchOrderWithProducts(id) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
-      throw new Error('Errore fetch ordine')
+      throw new Error(`Errore fetch ordine ${id}`)
     }
     const data = await res.json()
 

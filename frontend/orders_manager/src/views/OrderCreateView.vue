@@ -20,7 +20,7 @@
         <p v-if="isCreated">
             <router-link :to="{
                 name: 'order-detail',
-                params: { id: order.value.id }
+                params: { id: order.id }
             }">
                 Vai al dettaglio dell'ordine appena creato
             </router-link>
@@ -51,7 +51,8 @@ async function createOrderHandler() {
         if (!res.ok) {
             throw new Error('Errore creazione ordine')
         }
-        order.value = await res.json()
+        const data = await res.json()
+        Object.assign(order, data)
         isCreated.value = true
     } catch (err) {
         console.error(err)

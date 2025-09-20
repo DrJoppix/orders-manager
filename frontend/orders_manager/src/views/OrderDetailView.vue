@@ -41,7 +41,11 @@ const order = ref({})
 
 onMounted(() => {
     fetchOrderWithProducts(route.params.id).then(data => {
-        order.value = data
+        if(!data) {
+            router.push({ name: 'orders-list' })
+            return
+        }
+        Object.assign(order.value, data)
     })
 })
 

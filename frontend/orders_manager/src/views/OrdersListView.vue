@@ -34,6 +34,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { fetchOrders } from '@/services/orders'
 
 const orders = ref([])
 
@@ -44,43 +45,7 @@ const filters = reactive({
     ordering: ''
 })
 
-async function fetchOrders() {
-    let url = new URL('http://127.0.0.1:8000/api/orders/')
-
-    if (filters.search) {
-        url.searchParams.append(
-            'search',
-            filters.search
-        )
-    }
-    if (filters.name) {
-        url.searchParams.append(
-            'name',
-            filters.name
-        )
-    }
-    if (filters.date) {
-        url.searchParams.append(
-            'date',
-            filters.date)
-    }
-    if (filters.ordering) {
-        url.searchParams.append(
-            'ordering',
-            filters.ordering
-        )
-    }
-
-    try {
-        const res = await fetch(url)
-        if (!res.ok) {
-            throw new Error('Errore fetch ordini')
-        }
-        orders.value = await res.json()
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-onMounted(fetchOrders)
+onMounted(async () => {
+    orders.value = await fetchOrders(filters)
+})
 </script>

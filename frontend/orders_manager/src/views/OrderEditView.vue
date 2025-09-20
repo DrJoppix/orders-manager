@@ -31,6 +31,8 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { fetchOrder, updateOrder } from '@/services/orders'
+import { fetchProducts } from '@/services/products'
 
 // dichiarazione props esplicita per evitare errori in console.
 defineProps(['id'])
@@ -44,56 +46,17 @@ const order = reactive({
 })
 const products = ref([])
 
-async function fetchOrder() {
-    let url = new URL(`http://127.0.0.1:8000/api/orders/${route.params.id}/`)
-
-    try {
-        const res = await fetch(url)
-        if (!res.ok) {
-            throw new Error('Errore fetch ordine')
-        }
-        const data = await res.json()
-        order.name = data.name
-        order.description = data.description
-        order.date = data.date
-        order.products = data.products
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-async function fetchProducts() {
-    try {
-        let url = new URL('http://127.0.0.1:8000/api/products/');
-        const res = await fetch(url)
-        if (!res.ok) throw new Error('Errore fetch prodotti')
-        products.value = await res.json()
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-async function updateOrder() {
-    try {
-        const res = await fetch(`http://127.0.0.1:8000/api/orders/${route.params.id}/`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        })
-
-        if (!res.ok) {
-            throw new Error('Errore aggioramento ordine')
-        }
-
-        order.value = await res.json()
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-onMounted(fetchOrder)
-onMounted(fetchProducts)
+// Caricamento dettagli dell'ordine.
+onMounted(() => {
+    fetchOrder(route.params.id).then(data => {
+        // Assegna i dati alla proprietà reattiva corrispondente.
+        Object.assign(order, data)
+    })
+})
+onMounted(() => {
+    fetchProducts().then(data => {
+        products.value = data
+    })
+})
 
 </script>

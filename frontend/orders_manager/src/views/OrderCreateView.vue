@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Crea nuovo ordine</h1>
-        <form @submit.prevent="createOrder">
+        <form @submit.prevent="createOrderManager">
             <input v-model="form.name" type="text" placeholder="Nome" required />
             <input v-model="form.description" type="text" placeholder="Descrizione" />
             <input v-model="form.date" type="date" required />
@@ -30,6 +30,8 @@
 
 <script setup>
 import { reactive, ref, onMounted } from 'vue'
+import { fetchProducts } from '@/services/products'
+import { createOrder } from '@/services/orders'
 
 const form = reactive({
     name: '',
@@ -42,37 +44,22 @@ const isCreated = ref(false)
 const products = ref([])
 const order = reactive({})
 
-async function fetchProducts() {
+// Crea l'ordine, e mostra il link al dettaglio.
+async function createOrderManager() {
     try {
-        const res = await fetch('http://127.0.0.1:8000/api/products/')
-        if (!res.ok) throw new Error('Errore fetch prodotti')
-        products.value = await res.json()
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-async function createOrder() {
-    try {
-        const res = await fetch('http://127.0.0.1:8000/api/orders/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)
-        })
-
+        const res = await createOrder(form)
         if (!res.ok) {
             throw new Error('Errore creazione ordine')
         }
-
-        isCreated.value = true
-
         order.value = await res.json()
+        isCreated.value = true
     } catch (err) {
         console.error(err)
     }
 }
 
-onMounted(fetchProducts)
+// Carica i prodotti.
+onMounted(async () => {
+    products.value = await fetchProducts()
+})
 </script>

@@ -42,7 +42,7 @@ const isCreated = ref(false)
 const products = ref([])
 const order = reactive({})
 
-onMounted(async () => {
+async function fetchProducts() {
     try {
         const res = await fetch('http://127.0.0.1:8000/api/products/')
         if (!res.ok) throw new Error('Errore fetch prodotti')
@@ -50,8 +50,7 @@ onMounted(async () => {
     } catch (err) {
         console.error(err)
     }
-})
-
+}
 
 async function createOrder() {
     try {
@@ -74,4 +73,6 @@ async function createOrder() {
         console.error(err)
     }
 }
+
+onMounted(fetchProducts)
 </script>

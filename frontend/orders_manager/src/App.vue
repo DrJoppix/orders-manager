@@ -4,10 +4,6 @@
     <nav>
       <ul>
         <li>
-          <!-- Homepage -->
-          <router-link to="/">Torna alla home</router-link>
-        </li>
-        <li>
           <!-- Lista ordini -->
           <router-link to="/orders">Lista ordini</router-link>
         </li>

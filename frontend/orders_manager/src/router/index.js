@@ -28,6 +28,10 @@ const routes = [
     name: 'order-create',
     component: OrderCreateView,
   },
+  { // faccio redirect dalla root alla lista ordini
+    path: '/',
+    redirect: '/orders',
+  },
 ]
 
 const router = createRouter({

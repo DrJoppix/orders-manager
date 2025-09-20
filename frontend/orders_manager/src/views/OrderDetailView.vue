@@ -29,6 +29,9 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
+// dichiarazione props esplicita per evitare errori in console.
+defineProps(['id'])
+
 const route = useRoute()
 const order = ref({})
 

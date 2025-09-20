@@ -27,7 +27,24 @@
 - Avvia server
 
   - `python3 manage.py runserver`
+  - Lasciare il terminale aperto per far funionare gli endpoint del BE.
 
-- Avviare i test
+### Avviare l'ambiente dal secondo avvio in poi
 
-  - `python3 manage.py test orders`
+- `cd backend`
+- `source .venv/bin/activate`
+- `python3 manage.py runserver`
+
+### Avviare i test
+
+- `python3 manage.py test orders`
+
+## Configurazione FrontEnd in Vue.js
+
+In un altro terminale:
+
+- `cd frontend/orders_manager`
+- `npm install`
+- `npm run dev`
+- Lasciare il terminale aperto
+- Andrare sul link mostrato sul terminale

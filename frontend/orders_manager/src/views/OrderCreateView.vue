@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Crea nuovo ordine</h1>
-        <form @submit.prevent="createOrderManager">
+        <form @submit.prevent="createOrderHandler">
             <input v-model="form.name" type="text" placeholder="Nome" required />
             <input v-model="form.description" type="text" placeholder="Descrizione" />
             <input v-model="form.date" type="date" required />
@@ -45,7 +45,7 @@ const products = ref([])
 const order = reactive({})
 
 // Crea l'ordine, e mostra il link al dettaglio.
-async function createOrderManager() {
+async function createOrderHandler() {
     try {
         const res = await createOrder(form)
         if (!res.ok) {

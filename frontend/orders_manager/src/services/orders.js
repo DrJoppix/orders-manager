@@ -143,3 +143,25 @@ export async function fetchOrders(filters) {
     console.error(err)
   }
 }
+
+/**
+ * Elimina un ordine.
+ *
+ * @param Integer id. ID dell'ordine da eliminare
+ * @returns Boolean true se l'eliminazione è andata a buon fine, false altrimenti
+ */
+export async function deleteOrder(id) {
+  try {
+    const res = await fetch(`http://127.0.0.1:8000/api/orders/${id}/`, {
+      method: 'DELETE',
+    })
+    if (!res.ok) {
+      throw new Error(`Errore eliminazione ordine ${id}`)
+    }
+    return true
+  } catch (err) {
+    console.error(err)
+    alert(`Errore eliminazione ordine ${id}`)
+    return false
+  }
+}

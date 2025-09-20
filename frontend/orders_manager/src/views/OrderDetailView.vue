@@ -16,6 +16,8 @@
         <p>Data: {{ order.date }}</p>
     </div>
 
+    <button @click="deleteOrderHandler">Elimina ordine</button>
+
     <!-- Lista prodotti -->
     <h3>Prodotti</h3>
     <ul>
@@ -27,13 +29,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { fetchOrderWithProducts } from '@/services/orders'
+import { useRoute, useRouter } from 'vue-router'
+import { fetchOrderWithProducts, deleteOrder } from '@/services/orders'
 
 // dichiarazione props esplicita per evitare errori in console.
 defineProps(['id'])
 
 const route = useRoute()
+const router = useRouter()
 const order = ref({})
 
 onMounted(() => {
@@ -41,4 +44,21 @@ onMounted(() => {
         order.value = data
     })
 })
+
+const deleteOrderHandler = async () => {
+    const confirmDelete = window.confirm('Sei sicuro di voler eliminare questo ordine?')
+    if (!confirmDelete) {
+        return false
+    }
+    try {
+        const res = await deleteOrder(route.params.id)
+        if (!res) {
+            throw new Error('Errore eliminazione ordine')
+        }
+        alert('Ordine eliminato con successo!')
+        router.push({ name: 'orders-list' })
+    } catch (error) {
+        console.error('Errore eliminazione ordine:', error)
+    }
+}
 </script>

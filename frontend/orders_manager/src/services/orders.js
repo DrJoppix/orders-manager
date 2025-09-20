@@ -1,4 +1,5 @@
 import { fetchProduct } from '@/services/products'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 /**
  * Crea un nuovo ordine.
@@ -11,7 +12,7 @@ import { fetchProduct } from '@/services/products'
  */
 export async function createOrder(form) {
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/orders/', {
+    const res = await fetch(`${API_BASE_URL}orders/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ export async function createOrder(form) {
  * @returns Dettagli dell'ordine
  */
 export async function fetchOrder(id) {
-  let url = new URL(`http://127.0.0.1:8000/api/orders/${id}/`)
+  let url = new URL(`${API_BASE_URL}orders/${id}/`)
 
   try {
     const res = await fetch(url)
@@ -57,7 +58,7 @@ export async function fetchOrder(id) {
  * @returns Dettagli dell'ordine, inclusi i dettagli dei prodotti.
  */
 export async function fetchOrderWithProducts(id) {
-  let url = new URL(`http://127.0.0.1:8000/api/orders/${id}/`)
+  let url = new URL(`${API_BASE_URL}orders/${id}/`)
 
   try {
     const res = await fetch(url)
@@ -92,7 +93,7 @@ export async function fetchOrderWithProducts(id) {
  */
 export async function updateOrder(id, order) {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/${id}/`, {
+    const res = await fetch(`${API_BASE_URL}orders/${id}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -118,7 +119,7 @@ export async function updateOrder(id, order) {
  * @returns Array di ordini
  */
 export async function fetchOrders(filters) {
-  let url = new URL('http://127.0.0.1:8000/api/orders/')
+  let url = new URL(`${API_BASE_URL}orders/`)
 
   Object.keys(filters).forEach((key) => {
     if (filters[key]) {
@@ -145,7 +146,7 @@ export async function fetchOrders(filters) {
  */
 export async function deleteOrder(id) {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/${id}/`, {
+    const res = await fetch(`${API_BASE_URL}orders/${id}/`, {
       method: 'DELETE',
     })
     if (!res.ok) {

@@ -1,10 +1,12 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 /**
  * Servizio per gestire il fetch dei prodotti.
  *
  * @returns Array di prodotti
  */
 export async function fetchProducts(filters = {}) {
-  let url = new URL('http://127.0.0.1:8000/api/products/')
+  let url = new URL(`${API_BASE_URL}products/`)
   Object.keys(filters).forEach((key) => {
     if (filters[key]) {
       url.searchParams.append(key, filters[key])
@@ -28,7 +30,7 @@ export async function fetchProducts(filters = {}) {
  * @returns Dettagli del prodotto
  */
 export async function fetchProduct(id) {
-  let url = new URL(`http://127.0.0.1:8000/api/products/${id}/`)
+  let url = new URL(`${API_BASE_URL}products/${id}/`)
 
   try {
     const res = await fetch(url)

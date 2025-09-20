@@ -4,6 +4,7 @@ import OrdersListView from '@/views/OrdersListView.vue'
 import OrderDetailView from '@/views/OrderDetailView.vue'
 import OrderEditView from '@/views/OrderEditView.vue'
 import OrderCreateView from '@/views/OrderCreateView.vue'
+import ProductsView from '@/views/ProductsView.vue'
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: '/orders/create',
     name: 'order-create',
     component: OrderCreateView,
+  },
+  {
+    path: '/products',
+    name: 'products',
+    component: ProductsView,
   },
   { // faccio redirect dalla root alla lista ordini
     path: '/',

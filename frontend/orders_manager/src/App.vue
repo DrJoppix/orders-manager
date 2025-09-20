@@ -11,6 +11,10 @@
           <!-- Nuovo ordine -->
           <router-link to="/orders/create">Crea nuovo ordine</router-link>
         </li>
+        <li>
+          <!-- Lista prodotti -->
+          <router-link to="/products">Lista prodotti</router-link>
+        </li>
       </ul>
     </nav>
 

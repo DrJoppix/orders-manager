@@ -3,7 +3,7 @@
         <h1>Lista ordini</h1>
 
         <!-- Form filtri -->
-        <form @submit.prevent="fetchOrders">
+        <form @submit.prevent="applyFilters">
             <input v-model="filters.search" type="text" placeholder="Cerca..." />
             <input v-model="filters.name" type="text" placeholder="Cerca per nome esatto" />
             <input v-model="filters.date" type="date" />
@@ -44,6 +44,12 @@ const filters = reactive({
     date: '',
     ordering: ''
 })
+
+// Funzione per applicare i filtri. Ho dovuto separarla da fetchOrders.
+async function applyFilters(event) {
+    event.preventDefault()
+    orders.value = await fetchOrders(filters)
+}
 
 onMounted(async () => {
     orders.value = await fetchOrders(filters)

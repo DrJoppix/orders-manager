@@ -120,18 +120,11 @@ export async function updateOrder(id, order) {
 export async function fetchOrders(filters) {
   let url = new URL('http://127.0.0.1:8000/api/orders/')
 
-  if (filters?.search) {
-    url.searchParams.append('search', filters.search)
-  }
-  if (filters?.name) {
-    url.searchParams.append('name', filters.name)
-  }
-  if (filters?.date) {
-    url.searchParams.append('date', filters.date)
-  }
-  if (filters?.ordering) {
-    url.searchParams.append('ordering', filters.ordering)
-  }
+  Object.keys(filters).forEach((key) => {
+    if (filters[key]) {
+      url.searchParams.append(key, filters[key])
+    }
+  })
 
   try {
     const res = await fetch(url)

@@ -57,7 +57,7 @@ class OrderAPITest(TestCase):
         )
         self.assertEqual(
             len(response.data),
-            2,
+            5,
         )
 
     def test_retrieve_order(self):
@@ -107,7 +107,7 @@ class OrderAPITest(TestCase):
         )
         self.assertEqual(
             Order.objects.count(),
-            3,
+            6,
         )
 
     def test_search_order(self):
@@ -127,7 +127,7 @@ class OrderAPITest(TestCase):
         )
         self.assertEqual(
             len(response.data),
-            1,
+            2,
         )
         self.assertEqual(
             response.data[0]["name"],

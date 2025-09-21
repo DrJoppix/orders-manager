@@ -42,3 +42,9 @@ Endpoint di Products:
 
 - Accessibile come superuser sul path `/admin/`
 - Permette di effettuare operazioni CRUD sulle entità tramite interfaccia web
+
+## Testing
+
+- Test automatici per gli endpoint di Orders
+- Comando per eseguire i test: `python3 manage.py test orders`
+- NB: Siccome popolo il DB con 3 ordini e 3 prodotti direttamente dalla migration, ho dovuto modificare di conseguenza i test per considerare non un DB vuoto, ma bensì uno coi dati già popolati.

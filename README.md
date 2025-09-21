@@ -20,16 +20,25 @@
 
   - `python3 manage.py migrate`
 
-- Creazione superuser
-
-  - `python3 manage.py createsuperuser`
-
 - Avvia server
 
   - `python3 manage.py runserver`
   - Lasciare il terminale aperto per far funionare gli endpoint del BE.
 
-### Avviare l'ambiente dal secondo avvio in poi
+### Test tramite pannello Admin
+
+È possibile testare dal pannello admin i soli endpoint.
+In quel caso, sarà necessario creare un superuser tramite il comando guidato
+
+- `python3 manage.py createsuperuser`
+
+Fatto ciò, si potranno testare gli endpoint dal path
+
+- `http://127.0.0.1:8000/admin`
+
+### Avviare l'ambiente BE dal secondo avvio in poi
+
+Una volta inizializzato già tutto, basterà riattivare l'ambiente virtuale ed avviare il server.
 
 - `cd backend`
 - `source .venv/bin/activate`
@@ -48,3 +57,15 @@ In un altro terminale:
 - `npm run dev`
 - Lasciare il terminale aperto
 - Andrare sul link mostrato sul terminale
+
+### Avviare l'ambiente FE dal secondo avvio in poi
+
+Basterà avviare l'ambiente dev
+
+- `npm run dev`
+
+### Variabili d'ambiente
+
+È presente la variabile di ambiente `VITE_API_BASE_URL` che corrisponde agli endpoint del BE.
+Di default, ho già inserito `http://127.0.0.1:8000/api/`, ovvero il default di Django.
+In caso non si apra nella porta di default, modificarlo dal file `.env.development`

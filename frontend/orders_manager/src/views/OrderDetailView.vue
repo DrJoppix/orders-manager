@@ -1,30 +1,32 @@
 <template>
-    <div>
-        <h1>Dettaglio ordine {{ $route.params.id }}</h1>
+    <div class="order-detail">
+        <div>
+            <h1>Dettaglio ordine {{ $route.params.id }}</h1>
+        </div>
+
+        <!-- Link per modificare l'ordine -->
+        <router-link class="order-link" :to="{ name: 'order-edit', params: { id: $route.params.id } }">
+            Modifica ordine {{ $route.params.id }}
+        </router-link>
+
+        <!-- Dettagli ordine -->
+        <div class="order-details">
+            <h3>Dettagli</h3>
+            <p>Nome: {{ order.name }}</p>
+            <p>Descrizione: {{ order.description }}</p>
+            <p>Data: {{ order.date }}</p>
+        </div>
+
+        <button class="order-delete-btn" @click="deleteOrderHandler">Elimina ordine</button>
+
+        <!-- Lista prodotti -->
+        <h3>Prodotti</h3>
+        <ul class="order-products">
+            <li v-for="p in order.products" :key="p.id">
+                {{ p.name }} - €{{ p.price }}
+            </li>
+        </ul>
     </div>
-
-    <!-- Link per modificare l'ordine -->
-    <router-link :to="{ name: 'order-edit', params: { id: $route.params.id } }">
-        Modifica ordine {{ $route.params.id }}
-    </router-link>
-
-    <!-- Dettagli ordine -->
-    <div>
-        <h3>Dettagli</h3>
-        <p>Nome: {{ order.name }}</p>
-        <p>Descrizione: {{ order.description }}</p>
-        <p>Data: {{ order.date }}</p>
-    </div>
-
-    <button @click="deleteOrderHandler">Elimina ordine</button>
-
-    <!-- Lista prodotti -->
-    <h3>Prodotti</h3>
-    <ul>
-        <li v-for="p in order.products" :key="p.id">
-            {{ p.name }} - €{{ p.price }}
-        </li>
-    </ul>
 </template>
 
 <script setup>
@@ -41,7 +43,7 @@ const order = ref({})
 
 onMounted(() => {
     fetchOrderWithProducts(route.params.id).then(data => {
-        if(!data) {
+        if (!data) {
             router.push({ name: 'orders-list' })
             return
         }
@@ -66,3 +68,38 @@ const deleteOrderHandler = async () => {
     }
 }
 </script>
+
+<style scoped>
+.order-link {
+    text-decoration: none;
+    color: blue;
+}
+
+.order-link:hover {
+    text-decoration: underline;
+}
+
+.order-products {
+    list-style: none;
+    padding: 0;
+}
+
+.order-products li {
+    margin-bottom: 5px;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.order-delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+</style>

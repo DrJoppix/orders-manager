@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="orders-list">
         <h1>Lista ordini</h1>
 
         <!-- Form filtri -->
-        <form @submit.prevent="applyFilters">
+        <form class="filters" @submit.prevent="applyFilters">
             <input v-model="filters.search" type="text" placeholder="Cerca..." />
             <input v-model="filters.date" type="date" />
             <select v-model="filters.ordering">
@@ -17,19 +17,13 @@
         </form>
 
         <!-- Lista ordini -->
-        <ul>
-            <li v-for="order in orders" :key="order.id">
-
-                {{ order.name }} - {{ order.date }} - {{ order.description }} -
-
-                 <router-link :to="{ name: 'order-edit', params: { id: order.id } }">
-                    Modifica
-                </router-link>
-
-                <router-link :to="{ name: 'order-detail', params: { id: order.id } }">
-                    Dettaglio
-                </router-link>
-
+        <ul class="order-items">
+            <li v-for="order in orders" :key="order.id" class="order-item">
+                <span class="order-info">{{ order.name }} - {{ order.date }} - {{ order.description }}</span>
+                <router-link :to="{ name: 'order-edit', params: { id: order.id } }"
+                    class="order-link">Modifica</router-link>
+                <router-link :to="{ name: 'order-detail', params: { id: order.id } }"
+                    class="order-link">Dettaglio</router-link>
             </li>
         </ul>
     </div>
@@ -57,3 +51,43 @@ onMounted(async () => {
     orders.value = await fetchOrders(filters)
 })
 </script>
+
+<style scoped>
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filters input,
+.filters select,
+.filters button {
+    padding: 5px 10px;
+}
+
+.order-items {
+    list-style: none;
+    padding: 0;
+}
+
+.order-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid grey;
+}
+
+.order-info {
+    flex: 1;
+}
+
+.order-link {
+    text-decoration: none;
+    color: blue;
+}
+
+.order-link:hover {
+    text-decoration: underline;
+}
+</style>

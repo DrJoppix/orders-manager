@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="products-view">
         <h1>Lista prodotti</h1>
 
         <!-- Form filtri -->
-        <form @submit.prevent="applyFilters">
+        <form class="filters" @submit.prevent="applyFilters">
             <input v-model="filters.search" type="text" placeholder="Cerca..." />
             <select v-model="filters.ordering">
                 <option value="">Senza ordine</option>
@@ -14,14 +14,17 @@
             </select> <button type="submit">Applica</button>
         </form>
 
-        <!-- Lista ordini -->
-        <ul>
-            <li v-for="product in products" :key="product.id">
+        <!-- Lista prodotti -->
+        <div>
+            <h3>Prodotti</h3>
+            <ul>
+                <li class="order-products" v-for="product in products" :key="product.id">
 
-                {{ product.name }} - {{ product.price }}
+                    {{ product.name }}, € {{ product.price }}
 
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -46,3 +49,20 @@ onMounted(async () => {
     products.value = await fetchProducts(filters)
 })
 </script>
+
+<style scoped>
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filters input,
+.filters button {
+    padding: 5px 10px;
+}
+
+.order-products {
+    margin-top: 10px;
+}
+</style>

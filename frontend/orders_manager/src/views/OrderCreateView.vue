@@ -1,7 +1,9 @@
 <template>
-    <div>
+    <div class="order-create">
         <h1>Crea nuovo ordine</h1>
-        <form @submit.prevent="createOrderHandler">
+
+        <!-- Form creazione ordine -->
+        <form class="order-form" @submit.prevent="createOrderHandler">
             <input v-model="form.name" type="text" placeholder="Nome" required />
             <input v-model="form.description" type="text" placeholder="Descrizione" />
             <input v-model="form.date" type="date" required />
@@ -10,7 +12,9 @@
 
         <div>
             <h3>Prodotti</h3>
-            <div v-for="p in products" :key="p.id">
+
+            <!-- Lista prodotti -->
+            <div class="order-products" v-for="p in products" :key="p.id">
                 <label>
                     <input type="checkbox" :value="p.id" v-model="form.products" />
                     {{ p.name }}, €{{ p.price }}
@@ -64,3 +68,20 @@ onMounted(async () => {
     products.value = await fetchProducts()
 })
 </script>
+
+<style scoped>
+.order-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.order-form input,
+.order-form button {
+    padding: 5px 10px;
+}
+
+.order-products {
+    margin-top: 10px;
+}
+</style>

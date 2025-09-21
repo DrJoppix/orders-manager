@@ -112,3 +112,7 @@ In caso non si apra nella porta di default, modificarlo dal file `.env.developme
 #### Problemi noti
 
 - Via WSL2 non riesce a collegare l'utente al gruppo `docker`, quindi ogni comando docker va lanciato con `sudo`.
+
+## Built With
+
+[![Built With](https://skillicons.dev/icons?i=python,django,npm,vue,vite,docker)](https://skillicons.dev)

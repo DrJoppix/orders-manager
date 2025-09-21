@@ -1,0 +1,23 @@
+# Usa un'immagine di Python slim come base
+FROM python:3.13-slim
+
+# Imposta la working directory nel container
+WORKDIR /app
+
+# Copia il requirements.txt nel container
+COPY backend/requirements.txt .
+
+# Aggiorna pip per evitare errori
+RUN pip install --upgrade pip
+
+# Installa le dipendenze
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia tutto il backend
+COPY backend/ .
+
+# Espone la porta su cui Django girerà
+EXPOSE 8000
+
+# Comando di default per partire
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

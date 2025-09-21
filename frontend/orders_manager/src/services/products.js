@@ -15,6 +15,7 @@ export async function fetchProducts(filters = {}) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
+      alert('Errore fetch prodotti')
       throw new Error('Errore fetch prodotti')
     }
     return await res.json()
@@ -35,6 +36,7 @@ export async function fetchProduct(id) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
+      alert(`Errore fetch prodotto ${id}`)
       throw new Error(`Errore fetch prodotto ${id}`)
     }
     return await res.json()

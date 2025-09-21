@@ -21,6 +21,7 @@ export async function createOrder(form) {
     })
 
     if (!res.ok) {
+      alert(`Errore creazione ordine`)
       throw new Error('Errore creazione ordine')
     }
 
@@ -43,6 +44,7 @@ export async function fetchOrder(id) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
+      alert(`Errore fetch ordine ${id}`)
       throw new Error(`Errore fetch ordine ${id}`)
     }
     return await res.json()
@@ -63,6 +65,7 @@ export async function fetchOrderWithProducts(id) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
+      alert(`Errore fetch ordine ${id}`)
       throw new Error(`Errore fetch ordine ${id}`)
     }
     const data = await res.json()
@@ -102,7 +105,8 @@ export async function updateOrder(id, order) {
     })
 
     if (!res.ok) {
-      throw new Error('Errore aggioramento ordine')
+      alert(`Errore aggioramento ordine ${id}`)
+      throw new Error(`Errore aggioramento ordine ${id}`)
     }
 
     return await res.json()
@@ -130,6 +134,7 @@ export async function fetchOrders(filters) {
   try {
     const res = await fetch(url)
     if (!res.ok) {
+      alert('Errore fetch ordini')
       throw new Error('Errore fetch ordini')
     }
     return await res.json()
@@ -150,6 +155,7 @@ export async function deleteOrder(id) {
       method: 'DELETE',
     })
     if (!res.ok) {
+      alert(`Errore eliminazione ordine ${id}`)
       throw new Error(`Errore eliminazione ordine ${id}`)
     }
     return true

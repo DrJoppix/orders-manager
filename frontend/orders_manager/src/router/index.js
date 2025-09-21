@@ -34,7 +34,8 @@ const routes = [
     name: 'products',
     component: ProductsView,
   },
-  { // faccio redirect dalla root alla lista ordini
+  {
+    // faccio redirect dalla root alla lista ordini
     path: '/',
     redirect: '/orders',
   },

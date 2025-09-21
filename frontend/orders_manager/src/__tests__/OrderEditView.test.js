@@ -33,7 +33,7 @@ vi.mock('vue-router', () => ({
 }))
 
 describe('OrderEditView', () => {
-  it('mostra l\'ordine ed i prodotti caricati dal mock', async () => {
+  it("mostra l'ordine ed i prodotti caricati dal mock", async () => {
     const wrapper = mount(OrderEditView, {
       global: {
         mocks: {

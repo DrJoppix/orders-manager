@@ -4,13 +4,16 @@ Crea prodotti e ordini di prova nel setup.
 """
 
 import datetime
+
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
+
 from .models import Order, Product
 
 
+# pylint: disable=no-member
 class OrderAPITest(TestCase):
     """
     Test CRUD e filtri per gli ordini.

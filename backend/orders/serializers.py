@@ -4,9 +4,11 @@ Servono a trasformare i modelli Django in JSON e viceversa.
 """
 
 from rest_framework import serializers
+
 from .models import Order, Product
 
 
+# pylint: disable=too-few-public-methods
 class ProductSerializer(serializers.ModelSerializer):
     """Trasforma i prodotti in JSON e viceversa."""
 

@@ -3,12 +3,14 @@ View per l'app orders.
 Definiscono gli endpoint per le operazioni CRUD.
 """
 
-from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, viewsets
+
 from .models import Order, Product
 from .serializers import OrderSerializer, ProductSerializer
 
 
+# pylint: disable=no-member,too-many-ancestors
 class OrderViewSet(viewsets.ModelViewSet):
     """
     Fornisce gli endpoint CRUD per gli ordini:

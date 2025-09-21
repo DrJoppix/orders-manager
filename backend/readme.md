@@ -48,3 +48,11 @@ Endpoint di Products:
 - Test automatici per gli endpoint di Orders
 - Comando per eseguire i test: `python3 manage.py test orders`
 - NB: Siccome popolo il DB con 3 ordini e 3 prodotti direttamente dalla migration, ho dovuto modificare di conseguenza i test per considerare non un DB vuoto, ma bensì uno coi dati già popolati.
+
+## Linting
+
+Ho utilizzato `pylint` e `isort` per linting e sort delle dipendenze.
+Ho saltato le cartelle `.venv` e `migrations` poiché non necessarie.
+
+- `pylint . --ignore=.venv,migrations`
+- `isort . --skip .venv --skip migrations`

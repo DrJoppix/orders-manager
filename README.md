@@ -44,7 +44,7 @@ Una volta inizializzato già tutto, basterà riattivare l'ambiente virtuale ed a
 - `source .venv/bin/activate`
 - `python3 manage.py runserver`
 
-### Avviare i test
+### Avviare i test BE
 
 - `python3 manage.py test orders`
 
@@ -63,6 +63,11 @@ In un altro terminale:
 Basterà avviare l'ambiente dev
 
 - `npm run dev`
+
+### Avviare i test FE
+
+- `cd frontend`
+- `npm run test`
 
 ### Variabili d'ambiente
 

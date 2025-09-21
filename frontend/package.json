@@ -5,6 +5,7 @@
     "dev": "npm run dev --prefix orders_manager",
     "build": "npm run build --prefix orders_manager",
     "preview": "npm run preview --prefix orders_manager",
+    "test": "npm run test:unit --prefix orders_manager",
     "install": "npm install --prefix orders_manager"
   }
 }
